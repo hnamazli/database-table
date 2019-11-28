@@ -1,0 +1,41 @@
+{
+  "name": "database-table",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "webpack --mode-development",
+    "start": "webpack-dev-server --mode-development",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hnamazli/database-table.git"
+  },
+  "author": "Hasan",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/hnamazli/database-table/issues"
+  },
+  "homepage": "https://github.com/hnamazli/database-table#readme",
+  "dependencies": {
+    "webpack": "4.41.2",
+    "webpack-cli": "3.3.10",
+    "babel": "6.23.0",
+    "@babel/cli": "7.7.4",
+    "@babel/core": "7.7.4",
+    "@babel/preset-env": "7.7.4",
+    "@babel/plugin-proposal-class-properties": "7.7.4",
+    "babel-loader": "8.0.6",
+    "html-webpack-plugin": "3.2.0",
+    "html-loader": "0.5.5",
+    "sass": "1.23.7",
+    "sass-loader": "8.0.0",
+    "css-loader": "3.2.0",
+    "style-loader": "1.0.1",
+    "webpack-dev-server": "3.9.0",
+    "bootstrap": "4.4.1",
+    "jquery": "3.4.1",
+    "popper.js": "1.16.0"
+  }
+}
