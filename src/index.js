@@ -1,4 +1,4 @@
-import style from './style.scss';
+import './style.scss';
 import 'bootstrap';
 import View from './View';
 import Model from './Model';
