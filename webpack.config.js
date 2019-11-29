@@ -25,17 +25,17 @@ module.exports = {
     module: {
         rules: [
             {test: /\.html$/, use: "html-loader"},
-            /* { test: /\.js$/, 
+             { test: /\.js$/, 
                 exclude: /node_modules/,
                 use: {
                 loader: 'babel-loader',
                 options: {
-                    preset: ['@babel/preset-evn'],
+                    presets: ['@babel/preset-env'],
                     plugins : ['@babel/plugin-proposal-class-properties'],
                     }
                 }
-            }, */
-            {test: /\.s[ac]ss$/i, use: [MiniExtractPlugin.loader, "style-loader", "sass-loader"]}
+            }, 
+            {test: /\.s[ac]ss$/i, use: [MiniExtractPlugin.loader, "css-loader", "sass-loader"]}
         ]
     },
     plugins: [

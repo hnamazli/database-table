@@ -1,5 +1,4 @@
 import './style.scss';
-import 'bootstrap';
 import View from './View';
 import Model from './Model';
 import Controller from './Controller';
