@@ -1,15 +1,14 @@
 class View {
     constructor() {
         this._root = document.getElementById('root');
-        this._first = this.createInput('first');
-        this._second = this.createInput('second');
-        this._result = this.createInput('result');
-        this._result.readOnly = true;
+        this._test = document.createElement('table');
+        this._test.classList.add('table');
+        this._test.innerHTML = '<thead class="thead-light"><tr><th>First</th></tr></thead>';
 
-        this._root.append(this._first);
-        this._root.append(this._second);
-        this._result.append(his._result);
+        this._root.append(this._test);
     }
 
     
 }
+
+export default View;
