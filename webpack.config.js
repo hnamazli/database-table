@@ -10,7 +10,7 @@ module.exports = {
         path: path.resolve(__dirname, "./build")
     },
     devServer: {
-        port: 2019,
+        port: 3000,
         contentBase: path.resolve(__dirname, "./build"),
         hot: true,
         open: true,
