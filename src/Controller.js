@@ -1,6 +1,5 @@
 //import {sendGet, sendPut} from './REST';
 import * as rest from './REST'; //for tests
-import Model from "./Model";
 
 class Controller {
     constructor(model, view) {
