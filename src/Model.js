@@ -23,8 +23,8 @@ class Model {
         this._persons.shift(arg);
     }
 
-    dosSlice = (arg) => {
-        this._persons.slice(arg);
+    doSplice = (arg) => {
+        this._persons.splice(arg);
     }
 
 }
