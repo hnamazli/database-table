@@ -1,6 +1,11 @@
 class Model {
     constructor() {
-        this._persons = [];
+        this._persons = [
+            { fName: String,
+              lName: String,
+              age: number,
+            }
+          ];
     }
 
     addPush = (arg) => {
