@@ -40,6 +40,36 @@ class View {
         topController.classList.add('top__controller');
         topController.classList.add('col-4');
 
+        const wrapperInput = document.createElement('div');
+        wrapperInput.classList.add('controller__input');
+
+        const inputID = document.createElement('input');
+        inputID.setAttribute('type', 'number');
+        inputID.setAttribute('placeholder', 'ID');
+        inputID.setAttribute('id', 'id');
+        inputID.classList.add('form-control');
+
+        const inputFname = document.createElement('input');
+        inputFname.setAttribute('type', 'text');
+        inputFname.setAttribute('placeholder', 'First name');
+        inputFname.setAttribute('id', 'fname');
+        inputFname.classList.add('form-control');
+
+        const inputLname = document.createElement('input');
+        inputLname.setAttribute('type', 'text');
+        inputLname.setAttribute('placeholder', 'Last name');
+        inputLname.setAttribute('id', 'lname');
+        inputLname.classList.add('form-control');
+
+        const inputAge = document.createElement('input');
+        inputAge.setAttribute('type', 'text');
+        inputAge.setAttribute('placeholder', 'Age');
+        inputAge.setAttribute('id', 'age');
+        inputAge.classList.add('form-control');
+
+        const wrapperButtons = document.createElement('div');
+        wrapperButtons.classList.add('controller__buttons');
+
         const wrapperBottom = document.createElement('div');
         wrapperBottom.classList.add('wrapper__bottom');
 
@@ -48,6 +78,12 @@ class View {
         topTable.append(table);
         table.append(tableThead);
         tableThead.append(theadTr);
+        topController.append(wrapperInput);
+        wrapperInput.append(inputID);
+        wrapperInput.append(inputFname);
+        wrapperInput.append(inputLname);
+        wrapperInput.append(inputAge);
+        topController.append(wrapperButtons);
         wrapperTop.append(topController);
         wrapper.append(wrapperBottom);
 
