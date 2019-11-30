@@ -54,6 +54,28 @@ class View {
         this._root.append(wrapper);
     }
 
+    drawPersons = persons => {
+        const tbodyTr =  document.createElement('tbody');
+        const tableThead = document.querySelector('.table-wrapper__table');
+
+        persons.forEach((element, index) => {
+            const tr = document.createElement('tr');
+            const th = document.createElement('th');
+            th.innerText = index + 1;
+
+            tbodyTr.append(tr);
+            tr.append(th);
+            
+            for (var key in element) {
+                const th = document.createElement('th');
+                th.innerText = element[key];
+
+                tr.append(th);
+            }
+        });
+
+        tableThead.append(tbodyTr);
+    }
 
 }
 

@@ -6,7 +6,7 @@ import Controller from './Controller';
 const init = () => {
     const view = new View();
     const model = new Model();
-    const controller = new Controller();
+    const controller = new Controller(model, view);
 }
 
 init();
