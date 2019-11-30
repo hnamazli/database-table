@@ -5,7 +5,7 @@ class Model {
             {
                 firstName: 'Musa',
                 lastName: 'Xudiyev',
-                age: 20
+                age: 25
             },
             {
                 firstName: 'Azad',
