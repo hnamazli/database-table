@@ -1,4 +1,6 @@
-//'http://localhost:2019/persons'
+import * as constants from './constants';
+const url = constants.URL;
+
 export const sendGet = (url, cb) => {
     const xhr = new XMLHttpRequest();
     xhr.open('GET', url);
