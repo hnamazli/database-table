@@ -1,19 +1,32 @@
 class Model {
     constructor() {
-
+        this._persons = [];
     }
+
+    addPush = (arg) => {
+        this._persons.push(arg);
+    }
+
+    addUnshift = (arg) => {
+        this._persons.unshift(arg);
+    }
+
+    addSplice = (arg) => {
+        this._persons.splice(arg);
+    }
+
+    doPop = (arg) => {
+        this._persons.pop(arg);
+    }
+
+    doShift = (arg) => {
+        this._persons.shift(arg);
+    }
+
+    dosSlice = (arg) => {
+        this._persons.slice(arg);
+    }
+
 }
 
-let persons = [];
-console.log(Array.isArray(persons));
-let newPersons
-
-function addFirst() {
-    newPersons = document.getElementsByTagName("input")[0].value;
-    persons.unshift( newPersons );
-    document.getElementById("persons").innerHTML = persons;
-}
-function addLast() {
-    newPersons = document.getElementsByTagName("input")[0].value;
-    persons.push( newPersons );
-    document.getElementById("persons").innerHTML = persons;
+exports default Model;
