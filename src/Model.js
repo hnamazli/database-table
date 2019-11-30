@@ -24,7 +24,7 @@ class Model {
     }
 
     doSplice = (arg) => {
-        this._persons.splice(arg);
+        this._persons.splice(index, number of elements);
     }
 
 }
