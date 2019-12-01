@@ -117,36 +117,36 @@ class View {
         ////////////////////////////////////////////////////////////////////////////DOWNLOAD
 
         const  buttonDownloadXML = document.createElement("BUTTON");
-        buttonDownloadXML.id = 'buttonXML';
+        buttonDownloadXML.id = 'buttonDownloadXML';
         buttonDownloadXML.textContent = 'download XML';
 
         const buttonDownloadCSV = document.createElement("BUTTON");
-        buttonDownloadCSV.id = 'buttonCSV';
+        buttonDownloadCSV.id = 'buttonDownloadCSV';
         buttonDownloadCSV.textContent = 'download CSV';
 
         const buttonDownloadYAML = document.createElement("BUTTON");
-        buttonDownloadYAML.id = 'buttonYAML';
+        buttonDownloadYAML.id = 'buttonDownloadYAML';
         buttonDownloadYAML.textContent = 'download YAML';
 
         const buttonDownloadJSON = document.createElement("BUTTON");
-        buttonDownloadJSON.id = 'buttonJSON';
+        buttonDownloadJSON.id = 'buttonDownloadJSON';
         buttonDownloadJSON.textContent = 'download JSON';
         ///////////////////////////////////////////////////////////////////////////////SAVE
 
         const buttonSaveXML = document.createElement("BUTTON");
-        buttonSaveXML.id = 'buttonXML';
+        buttonSaveXML.id = 'buttonSaveXML';
         buttonSaveXML.textContent = 'Save XML';
 
         const buttonSaveCSV = document.createElement("BUTTON");
-        buttonSaveCSV.id = 'buttonCSV';
+        buttonSaveCSV.id = 'buttonSaveCSV';
         buttonSaveCSV.textContent = 'Save CSV';
 
         const buttonSaveYAML = document.createElement("BUTTON");
-        buttonSaveYAML.id = 'buttonYAML';
+        buttonSaveYAML.id = 'buttonSaveYAML';
         buttonSaveYAML.textContent = 'Save YAML';
 
         const buttonSaveJSON = document.createElement("BUTTON");
-        buttonSaveJSON.id = 'buttonJSON';
+        buttonSaveJSON.id = 'buttonSaveJSON';
         buttonSaveJSON.textContent = 'Save JSON';
         //////////////////////////////////////////////////////////////////////////////////////
         wrapper.append(wrapperTop);
@@ -243,15 +243,7 @@ class View {
     }
     */
     onButtonAdding = cb => { // собирает данные для добавление в таблицу
-        const buttonAddFirst = document.getElementById('buttonAddFirst');
-        const buttonAddEnd = document.getElementById('buttonAddEnd');
-        const buttonAddById = document.getElementById('buttonAddById');
-        
-        const inputId = document.getElementById('inputId');
-        const inputFirstName = document.getElementById('inputFirstName');
-        const inputLastName = document.getElementById('inputLastName');
-        const inputAge = document.getElementById('inputAge');
-    
+       
         buttonAddFirst.onclick = () => {
             if (inputFirstName.value == '' || inputLastName.value == '' || inputAge.value == '') {
                 alert('not all data entered');
@@ -297,18 +289,10 @@ class View {
     }
 
     onButtonRemoving = cb => { //для удаления 
-        const buttonRemoveFirst = document.getElementById('buttonRemoveFirst');
-        const buttonRemoveEnd = document.getElementById('buttonRemoveEnd');
-        const buttonRemoveById = document.getElementById('buttonRemoveById');
-        
-        const inputId = document.getElementById('inputId');
-        const inputFirstName = document.getElementById('inputFirstName');
-        const inputLastName = document.getElementById('inputLastName');
-        const inputAge = document.getElementById('inputAge');
     
         buttonRemoveFirst.onclick = () => {
             let action = 'tofirst'; //откуда удалить элемент
-            cb(action, inputFirstName.value, inputLastName.value, inputAge.value);
+            cb(action);
               
         };
 
@@ -323,13 +307,57 @@ class View {
                 alert('not all data entered');
             } else {
                 let action = 'byid';
-                cb(action, inputFirstName.value, inputLastName.value, inputAge.value, inputId.value);
+                cb(action, inputId.value);
             }
               
         };
 
     }
     
+    onButtonSave = cb => {
+
+        buttonSaveXML.onclick = () => {
+            let format = 'xml';
+            cb(format);
+        }
+
+        buttonSaveCSV.onclick = () => {
+            let format = 'csv';
+            cb(format);
+        }
+
+        buttonSaveYAML.onclick = () => {
+            let format = 'yaml';
+            cb(format);
+        }
+
+        buttonSaveJSON.onclick = () => {
+            let format = 'json';
+            cb(format);
+        }
+    }
+
+    onButtonDownload = cb => {
+        buttonDownloadXML.onclick = () => {
+            let format = 'xml';
+            cb(format);
+        }
+
+        buttonDownloadCSV.onclick = () => {
+            let format = 'csv';
+            cb(format);
+        }
+
+        buttonDownloadYAML.onclick = () => {
+            let format = 'yaml';
+            cb(format);
+        }
+
+        buttonDownloadJSON.onclick = () => {
+            let format = 'json';
+            cb(format);
+        }
+    }
 }
 
 export default View;
