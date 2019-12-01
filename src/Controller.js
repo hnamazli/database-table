@@ -6,8 +6,10 @@ class Controller {
         this._model = model;
         this._view = view;
 
-        this._view.onButtonAdding(this.personAdding.bind(this));
-        this._view.onButtonRemoving(this.personRemoving.bind(this));
+        this._view.onButtonAdding(this.personAdding);
+        this._view.onButtonRemoving(this.personRemoving);
+        this._view.onButtonSave(this.formatSave);
+        this._view.onButtonDownload(this.formatDownload);
 
         this._view.drawPersons(this._model.getPersons());
     }
@@ -37,7 +39,7 @@ class Controller {
 
     }
 
-    personRemoving = (action, firstName, lastName, age, id) => {
+    personRemoving = (action, id) => {
 
         if (action === 'tofirst') {
             this.personRemoveFirst();
@@ -102,6 +104,55 @@ class Controller {
         this._view.clearAllPersons();
         this._view.drawPersons(this._model.getPersons());
     }
+
+    formatSave = (format) => {
+        
+    }
+
+    formatDownload = (format) => {
+        if (format === 'xml') {
+            this.convertToXml(this._model.getPersons());
+        }
+        if (format === 'csv') {
+            
+        }
+        if (format === 'yaml') {
+            
+        }
+        if (format === 'json') {
+            
+        }
+    }
+    
+    convertToXml = (rows) => {
+        let a = "<persons>";
+        let row = "";
+
+        rows.forEach(function (value, index) {
+            row += "\r\t" + "<person>" + "\r\n";
+            for (let key in value) {
+                row += "\t\t" + "<" + key + ">" + value[key] + "</" + key + ">" + "\r\n";
+            }
+
+            row += "\t" + "</person>"  + "\r\n";
+        });
+
+        a += row + "</persons>";
+
+        let xmltext = a;
+
+        let filename = "file.xml";
+        let pom = document.createElement('a');
+        let bb = new Blob([xmltext], {type: 'text/plain'});
+
+        pom.setAttribute('href', window.URL.createObjectURL(bb));
+        pom.setAttribute('download', filename);
+
+        pom.dataset.downloadurl = ['text/plain', pom.download, pom.href].join(':');
+
+        pom.classList.add('xml__file');
+    }
+    
 }
 
 window.rest = rest; //for tests
