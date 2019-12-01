@@ -262,7 +262,7 @@ class View {
             if (inputFirstName.value == '' || inputLastName.value == '' || inputAge.value == '') {
                 alert('not all data entered');
             } else {
-                let action = 'tofirst'; //куда добавить элемент
+                let action = 'toend'; //куда добавить элемент
                 cb(action, inputFirstName.value, inputLastName.value, inputAge.value);
                   
                 inputFirstName.value = '';
@@ -276,7 +276,7 @@ class View {
             if (inputFirstName.value == '' || inputLastName.value == '' || inputAge.value == '') {
                 alert('not all data entered');
             } else {
-                let action = 'byId'; //куда добавить элемент
+                let action = 'byid'; //куда добавить элемент
                 cb(action, inputFirstName.value, inputLastName.value, inputAge.value, inputId.value);
                   
                 inputFirstName.value = '';
