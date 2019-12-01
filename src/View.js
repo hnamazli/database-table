@@ -1,4 +1,5 @@
 import * as constants from './constants';
+import Controller from './Controller';
 
 class View {
     constructor() {
@@ -35,28 +36,118 @@ class View {
 
             theadTr.append(th);
         });
-
+        
+        /////////////////////////////////////////////////////////////////////////
         const topController = document.createElement('div');
         topController.classList.add('top__controller');
         topController.classList.add('col-4');
+        /////////////////////////////////////////////////////////////////////////
+        const controllerInput = document.createElement('div'); ////див для вводов
+        controllerInput.classList.add('controller__input');
 
+        const controllerButtons = document.createElement('div'); //для кнопок 
+        controllerButtons.classList.add('controller__buttons');
+
+        const buttonAdding = document.createElement('div');
+        buttonAdding.classList.add('buttons__adding');
+
+        const buttonRemoves = document.createElement('div');
+        buttonRemoves.classList.add('buttons__removing');
+        ///////////////////////////////////////////////////////////////////INPUTS
+        
+        const inputId = document.createElement("INPUT");
+        inputId.setAttribute("type", "text");
+        inputId.id = 'inputId';
+
+        const inputFirstName = document.createElement("INPUT");
+        inputFirstName.setAttribute("type", "text");
+        inputFirstName.id = 'inputFirstName';
+
+        const inputLastName = document.createElement("INPUT");
+        inputLastName.setAttribute("type", "text");
+        inputLastName.id = 'inputLastName';
+
+        const inputAge = document.createElement("INPUT");
+        inputAge.setAttribute("type", "text");
+        inputAge.id = 'inputAge';
+
+        //this.createInput('inputId');
+
+        ///////////////////////////////////////////////////////////////////BUTTONS
+        const buttonAddFirst = document.createElement("BUTTON");
+        buttonAddFirst.id = 'buttonAddFirst';
+        buttonAddFirst.textContent = '+ First'
+
+        const buttonRemoveFirst = document.createElement("BUTTON");
+        buttonRemoveFirst.id = 'buttonRemoveFirst';
+        buttonRemoveFirst.textContent = '- First'
+
+        const buttonAddEnd = document.createElement("BUTTON");
+        buttonAddEnd.id = 'buttonAddEnd';
+        buttonAddEnd.textContent = '+ End';
+
+        const buttonRemoveEnd = document.createElement("BUTTON");
+        buttonRemoveEnd.id = 'buttonRemoveEnd';
+        buttonRemoveEnd.textContent = '- End';
+
+        const buttonAddById = document.createElement("BUTTON");
+        buttonAddById.id = 'buttonAddById';
+        buttonAddById.textContent = '+ Id';
+
+        const buttonRemoveById = document.createElement("BUTTON");
+        buttonRemoveById.id = 'buttonRemoveById';
+        buttonRemoveById.textContent = '- Id';
+
+        ////////////////////////////////////////////////////////////////////////////
         const wrapperBottom = document.createElement('div');
         wrapperBottom.classList.add('wrapper__bottom');
 
         wrapper.append(wrapperTop);
-        wrapperTop.append(topTable);
-        topTable.append(table);
-        table.append(tableThead);
-        tableThead.append(theadTr);
-        wrapperTop.append(topController);
         wrapper.append(wrapperBottom);
 
+        wrapperTop.append(topTable);
+        wrapperTop.append(topController);
+
+        table.append(tableThead);
+        topTable.append(table);
+        tableThead.append(theadTr);
+       
+        topController.append(controllerInput);
+        topController.append(controllerButtons);
+
+        controllerInput.append(inputFirstName);
+        controllerInput.append(inputLastName);
+        controllerInput.append(inputAge);
+        controllerInput.append(inputId);
+        
+
+        controllerButtons.append(buttonRemoves);
+        controllerButtons.append(buttonAdding);
+
+        buttonAdding.append(buttonAddFirst);
+        buttonRemoves.append(buttonRemoveFirst);
+        buttonAdding.append(buttonAddEnd);
+        buttonRemoves.append(buttonRemoveEnd);
+        buttonAdding.append(buttonAddById);
+        buttonRemoves.append(buttonRemoveById);
+      
         this._root.append(wrapper);
+        
     }
+    //createElementInput //тут будет разбиение на функции createElement(название)
+
+    // createInput = id => {
+    //     let input = document.createElement("INPUT");
+    //     input.setAttribute("type", "text");
+    //     input.id = id;
+    //     return input;
+    // }
 
     drawPersons = persons => {
+        this.clearAllPersons(); //чистит перед отрисовкой 
         const tbodyTr =  document.createElement('tbody');
         const tableThead = document.querySelector('.table-wrapper__table');
+        tbodyTr.id = 'tbody';
 
         persons.forEach((element, index) => {
             const tr = document.createElement('tr');
@@ -75,6 +166,15 @@ class View {
         });
 
         tableThead.append(tbodyTr);
+    }
+
+    clearAllPersons = () => {
+        let personsWrapper = document.getElementById('tbody');
+        personsWrapper.remove();
+    }
+
+    checkInputs = () => {
+
     }
 
 }
