@@ -110,49 +110,76 @@ class Controller {
     }
 
     formatDownload = (format) => {
-        if (format === 'xml') {
-            this.convertToXml(this._model.getPersons());
-        }
-        if (format === 'csv') {
-            
-        }
-        if (format === 'yaml') {
-            
-        }
-        if (format === 'json') {
-            
+        let data = '';
+
+        switch (format) {
+            case 'xml':
+                data = this.convertToXml(this._model.getPersons());
+                this.getDown(data, format);
+
+                break;
+            case 'csv':
+                data = this.convertToCsv(this._model.getPersons());
+                this.getDown(data, format);
+
+                break;
+            case 'yaml':
+                console.log('Hello YAML');
+                break;
+            case 'json':
+                console.log('Hello JSON');
+                break;
+            default:
+                break;
         }
     }
     
     convertToXml = (rows) => {
-        let a = "<persons>";
-        let row = "";
+        let xml = "<?xml version='1.0' encoding='UTF-8'?>\r\n";
+        xml += "<persons>";
 
         rows.forEach(function (value, index) {
-            row += "\r\t" + "<person>" + "\r\n";
+            xml += "\r\t" + "<person>" + "\r\t\t" + "<id>" + (index + 1) + "</id>" + "\r\n";
             for (let key in value) {
-                row += "\t\t" + "<" + key + ">" + value[key] + "</" + key + ">" + "\r\n";
+                xml += "\t\t" + "<" + key + ">" + value[key] + "</" + key + ">" + "\r\n";
             }
 
-            row += "\t" + "</person>"  + "\r\n";
+            xml += "\t" + "</person>"  + "\r\n";
         });
 
-        a += row + "</persons>";
+        xml += "</persons>";
 
-        let xmltext = a;
+        return xml;
+    }
 
-        let filename = "file.xml";
-        let pom = document.createElement('a');
-        let bb = new Blob([xmltext], {type: 'text/plain'});
+    convertToCsv = (rows) => {
+        let csvContent = "";
 
-        pom.setAttribute('href', window.URL.createObjectURL(bb));
-        pom.setAttribute('download', filename);
+        rows.forEach(function (value, index) {
+            csvContent += index + 1 + ",";
 
-        pom.dataset.downloadurl = ['text/plain', pom.download, pom.href].join(':');
+            for (const key in value) {
+                csvContent += value[key] + ",";    
+            }
+            
+            csvContent += "\r\n";
+        });
 
-        pom.classList.add('xml__file');
+        return csvContent;
     }
     
+    getDown = (data, ext) => {
+        let fileName = "persons." + ext;
+        let link = document.createElement('a');
+        let bb = new Blob([data], {type: 'text/' + ext});
+
+        link.setAttribute('href', window.URL.createObjectURL(bb));
+        link.setAttribute('download', fileName);
+
+        link.dataset.downloadUrl = ['text/plain', link.download, link.href].join(':');
+
+        link.click();
+    }
 }
 
 window.rest = rest; //for tests
