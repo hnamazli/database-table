@@ -191,14 +191,14 @@ class View {
         const buttonAddEnd = document.getElementById('buttonAddEnd');
         const buttonAddById = document.getElementById('buttonAddById');
         
-        let inputId = document.getElementById('inputId');
-        let inputFirstName = document.getElementById('inputFirstName');
-        let inputLastName = document.getElementById('inputLastName');
-        let inputAge = document.getElementById('inputAge');
+        const inputId = document.getElementById('inputId');
+        const inputFirstName = document.getElementById('inputFirstName');
+        const inputLastName = document.getElementById('inputLastName');
+        const inputAge = document.getElementById('inputAge');
     
         buttonAddFirst.onclick = () => {
             let action = 'tofirst'; //куда добавить элемент
-            cb(action, inputFirstName.value, inputLastName.value, inputAge.value, inputId.value);
+            cb(action, inputFirstName.value, inputLastName.value, inputAge.value);
               
             inputFirstName.value = '';
             inputLastName.value = '';
@@ -208,7 +208,7 @@ class View {
 
         buttonAddEnd.onclick = () => {
             let action = 'toend';
-            cb(action, inputFirstName.value, inputLastName.value, inputAge.value, inputId.value);
+            cb(action, inputFirstName.value, inputLastName.value, inputAge.value);
               
             inputFirstName.value = '';
             inputLastName.value = '';
