@@ -35,28 +35,179 @@ class View {
 
             theadTr.append(th);
         });
-
+        
+        /////////////////////////////////////////////////////////////////////////
         const topController = document.createElement('div');
         topController.classList.add('top__controller');
         topController.classList.add('col-4');
+        /////////////////////////////////////////////////////////////////////////
+        const controllerInput = document.createElement('div'); ////див для вводов
+        controllerInput.classList.add('controller__input');
 
+        const controllerButtons = document.createElement('div'); //для кнопок 
+        controllerButtons.classList.add('controller__buttons');
+
+        const buttonAdding = document.createElement('div');
+        buttonAdding.classList.add('buttons__adding');
+
+        const buttonRemoves = document.createElement('div');
+        buttonRemoves.classList.add('buttons__removing');
+        ///////////////////////////////////////////////////////////////////INPUTS
+        
+        const inputId = document.createElement("INPUT");
+        inputId.setAttribute("type", "text");          
+        inputId.id = 'inputId';
+        inputId.placeholder="Id"
+
+        const inputFirstName = document.createElement("INPUT");
+        inputFirstName.setAttribute("type", "text");
+
+        inputFirstName.id = 'inputFirstName';
+        inputFirstName.placeholder="First Name"
+
+        const inputLastName = document.createElement("INPUT");
+        inputLastName.setAttribute("type", "text");
+
+        inputLastName.id = 'inputLastName';
+        inputLastName.placeholder="Last Name"
+
+        const inputAge = document.createElement("INPUT");
+        inputAge.setAttribute("type", "text");
+
+        inputAge.id = 'inputAge';
+        inputAge.placeholder="Age"
+
+        //this.createInput('inputId');
+
+        ///////////////////////////////////////////////////////////////////BUTTONS
+        const buttonAddFirst = document.createElement("BUTTON");
+        buttonAddFirst.id = 'buttonAddFirst';
+        buttonAddFirst.textContent = '+ First'
+
+        const buttonRemoveFirst = document.createElement("BUTTON");
+        buttonRemoveFirst.id = 'buttonRemoveFirst';
+        buttonRemoveFirst.textContent = '- First'
+
+        const buttonAddEnd = document.createElement("BUTTON");
+        buttonAddEnd.id = 'buttonAddEnd';
+        buttonAddEnd.textContent = '+ End';
+
+        const buttonRemoveEnd = document.createElement("BUTTON");
+        buttonRemoveEnd.id = 'buttonRemoveEnd';
+        buttonRemoveEnd.textContent = '- End';
+
+        const buttonAddById = document.createElement("BUTTON");
+        buttonAddById.id = 'buttonAddById';
+        buttonAddById.textContent = '+ Id';
+
+        const buttonRemoveById = document.createElement("BUTTON");
+        buttonRemoveById.id = 'buttonRemoveById';
+        buttonRemoveById.textContent = '- Id';
+
+        ////////////////////////////////////////////////////////////////////////////
         const wrapperBottom = document.createElement('div');
         wrapperBottom.classList.add('wrapper__bottom');
 
+        const bottomDownload = document.createElement('div');
+        bottomDownload.classList.add('bottom__download');
+
+        const bottomSave = document.createElement('div');
+        bottomSave.classList.add('bottom__save');
+
+        ////////////////////////////////////////////////////////////////////////////DOWNLOAD
+
+        const  buttonDownloadXML = document.createElement("BUTTON");
+        buttonDownloadXML.id = 'buttonXML';
+        buttonDownloadXML.textContent = 'download XML';
+
+        const buttonDownloadCSV = document.createElement("BUTTON");
+        buttonDownloadCSV.id = 'buttonCSV';
+        buttonDownloadCSV.textContent = 'download CSV';
+
+        const buttonDownloadYAML = document.createElement("BUTTON");
+        buttonDownloadYAML.id = 'buttonYAML';
+        buttonDownloadYAML.textContent = 'download YAML';
+
+        const buttonDownloadJSON = document.createElement("BUTTON");
+        buttonDownloadJSON.id = 'buttonJSON';
+        buttonDownloadJSON.textContent = 'download JSON';
+        ///////////////////////////////////////////////////////////////////////////////SAVE
+
+        const buttonSaveXML = document.createElement("BUTTON");
+        buttonSaveXML.id = 'buttonXML';
+        buttonSaveXML.textContent = 'Save XML';
+
+        const buttonSaveCSV = document.createElement("BUTTON");
+        buttonSaveCSV.id = 'buttonCSV';
+        buttonSaveCSV.textContent = 'Save CSV';
+
+        const buttonSaveYAML = document.createElement("BUTTON");
+        buttonSaveYAML.id = 'buttonYAML';
+        buttonSaveYAML.textContent = 'Save YAML';
+
+        const buttonSaveJSON = document.createElement("BUTTON");
+        buttonSaveJSON.id = 'buttonJSON';
+        buttonSaveJSON.textContent = 'Save JSON';
+        //////////////////////////////////////////////////////////////////////////////////////
         wrapper.append(wrapperTop);
-        wrapperTop.append(topTable);
-        topTable.append(table);
-        table.append(tableThead);
-        tableThead.append(theadTr);
-        wrapperTop.append(topController);
         wrapper.append(wrapperBottom);
 
+        wrapperTop.append(topTable);
+        wrapperTop.append(topController);
+
+        table.append(tableThead);
+        topTable.append(table);
+        tableThead.append(theadTr);
+       
+        topController.append(controllerInput);
+        topController.append(controllerButtons);
+
+        controllerInput.append(inputFirstName);
+        controllerInput.append(inputLastName);
+        controllerInput.append(inputAge);
+        controllerInput.append(inputId);
+        
+        controllerButtons.append(buttonRemoves);
+        controllerButtons.append(buttonAdding);
+
+        buttonAdding.append(buttonAddFirst);
+        buttonRemoves.append(buttonRemoveFirst);
+        buttonAdding.append(buttonAddEnd);
+        buttonRemoves.append(buttonRemoveEnd);
+        buttonAdding.append(buttonAddById);
+        buttonRemoves.append(buttonRemoveById);
+
+        wrapperBottom.append(bottomDownload);
+        wrapperBottom.append(bottomSave);
+
+        bottomDownload.append(buttonDownloadXML);
+        bottomDownload.append(buttonDownloadCSV);
+        bottomDownload.append(buttonDownloadYAML);
+        bottomDownload.append(buttonDownloadJSON);
+
+        bottomSave.append(buttonSaveXML);
+        bottomSave.append(buttonSaveCSV);
+        bottomSave.append(buttonSaveYAML);
+        bottomSave.append(buttonSaveJSON);
+
+      
         this._root.append(wrapper);
+
+        ///////////////////////////////////////////////////////////////callback
     }
+    //createElementInput //тут будет разбиение на функции createElement(название)
+
+    // createInput = id => {
+    //     let input = document.createElement("INPUT");
+    //     input.setAttribute("type", "text");
+    //     input.id = id;
+    //     return input;
+    // }
 
     drawPersons = persons => {
         const tbodyTr =  document.createElement('tbody');
         const tableThead = document.querySelector('.table-wrapper__table');
+        tbodyTr.id = 'tbody';
 
         persons.forEach((element, index) => {
             const tr = document.createElement('tr');
@@ -76,7 +227,109 @@ class View {
 
         tableThead.append(tbodyTr);
     }
+    
+   
+    clearAllPersons = () => {
+        let personsWrapper = document.getElementById('tbody');
+        personsWrapper.remove();
+    }
+    /*
+    checkInputs = () => {
+        const inputId = getElementById('inputId');
+        const inputFirstName = getElementById('inputFirstName');
+        const inputLastName = getElementById('inputLastName');
+        const inputAge = getElementById('inputAge');
 
+    }
+    */
+    onButtonAdding = cb => { // собирает данные для добавление в таблицу
+        const buttonAddFirst = document.getElementById('buttonAddFirst');
+        const buttonAddEnd = document.getElementById('buttonAddEnd');
+        const buttonAddById = document.getElementById('buttonAddById');
+        
+        const inputId = document.getElementById('inputId');
+        const inputFirstName = document.getElementById('inputFirstName');
+        const inputLastName = document.getElementById('inputLastName');
+        const inputAge = document.getElementById('inputAge');
+    
+        buttonAddFirst.onclick = () => {
+            if (inputFirstName.value == '' || inputLastName.value == '' || inputAge.value == '') {
+                alert('not all data entered');
+            } else {
+                let action = 'tofirst'; //куда добавить элемент
+                cb(action, inputFirstName.value, inputLastName.value, inputAge.value);
+                  
+                inputFirstName.value = '';
+                inputLastName.value = '';
+                inputAge.value = '';
+                inputId.value = '';
+            }     
+        };
+
+        buttonAddEnd.onclick = () => {
+            if (inputFirstName.value == '' || inputLastName.value == '' || inputAge.value == '') {
+                alert('not all data entered');
+            } else {
+                let action = 'tofirst'; //куда добавить элемент
+                cb(action, inputFirstName.value, inputLastName.value, inputAge.value);
+                  
+                inputFirstName.value = '';
+                inputLastName.value = '';
+                inputAge.value = '';
+                inputId.value = '';
+            }     
+        };
+
+        buttonAddById.onclick = () => {
+            if (inputFirstName.value == '' || inputLastName.value == '' || inputAge.value == '') {
+                alert('not all data entered');
+            } else {
+                let action = 'byId'; //куда добавить элемент
+                cb(action, inputFirstName.value, inputLastName.value, inputAge.value, inputId.value);
+                  
+                inputFirstName.value = '';
+                inputLastName.value = '';
+                inputAge.value = '';
+                inputId.value = '';
+            }     
+        };
+
+    }
+
+    onButtonRemoving = cb => { //для удаления 
+        const buttonRemoveFirst = document.getElementById('buttonRemoveFirst');
+        const buttonRemoveEnd = document.getElementById('buttonRemoveEnd');
+        const buttonRemoveById = document.getElementById('buttonRemoveById');
+        
+        const inputId = document.getElementById('inputId');
+        const inputFirstName = document.getElementById('inputFirstName');
+        const inputLastName = document.getElementById('inputLastName');
+        const inputAge = document.getElementById('inputAge');
+    
+        buttonRemoveFirst.onclick = () => {
+            let action = 'tofirst'; //откуда удалить элемент
+            cb(action, inputFirstName.value, inputLastName.value, inputAge.value);
+              
+        };
+
+        buttonRemoveEnd.onclick = () => {
+            let action = 'toend';
+            cb(action, inputFirstName.value, inputLastName.value, inputAge.value);
+              
+        };
+
+        buttonRemoveById.onclick = () => {
+            if (inputId.value == ''){
+                alert('not all data entered');
+            } else {
+                let action = 'byid';
+                cb(action, inputFirstName.value, inputLastName.value, inputAge.value, inputId.value);
+            }
+              
+        };
+
+    }
+    
 }
 
 export default View;
