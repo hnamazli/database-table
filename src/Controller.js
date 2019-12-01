@@ -106,51 +106,152 @@ class Controller {
     }
 
     formatSave = (format) => {
-        
+        if (format === 'xml') {
+            this.convertToXML(this._model.getPersons());
+        }
+        if (format === 'csv') {
+            this.convertToCSV(this._model.getPersons());
+        }
+        if (format === 'yaml') {
+            this.convertToYAML(this._model.getPersons());
+        }
+        if (format === 'json') {
+            this.convertToJSON(this._model.getPersons());
+        }
     }
 
     formatDownload = (format) => {
+
         if (format === 'xml') {
-            this.convertToXml(this._model.getPersons());
+            this.convertToXML(this._model.getPersons(), 'download');
         }
         if (format === 'csv') {
-            
+            this.convertToCSV(this._model.getPersons(), 'download');
         }
         if (format === 'yaml') {
-            
+            this.convertToYAML(this._model.getPersons(), 'download');
         }
         if (format === 'json') {
-            
+            this.convertToJSON(this._model.getPersons(), 'download');
         }
     }
-    
-    convertToXml = (rows) => {
-        let a = "<persons>";
-        let row = "";
+
+    convertToXML = (rows, action) => {
+        let xmlContent = "<?xml version='1.0' encoding='UTF-8'?>\r\n";
+        xmlContent += "<persons>";
 
         rows.forEach(function (value, index) {
-            row += "\r\t" + "<person>" + "\r\n";
+            xmlContent += "\r\t" + "<person>" + "\r\t\t" + "<id>" + (index + 1) + "</id>" + "\r\n";
             for (let key in value) {
-                row += "\t\t" + "<" + key + ">" + value[key] + "</" + key + ">" + "\r\n";
+                xmlContent += "\t\t" + "<" + key + ">" + value[key] + "</" + key + ">" + "\r\n";
             }
 
-            row += "\t" + "</person>"  + "\r\n";
+            xmlContent += "\t" + "</person>"  + "\r\n";
         });
 
-        a += row + "</persons>";
+        xmlContent += "</persons>";
 
-        let xmltext = a;
+        if (action === 'download') {
+            this.downloadFile(xmlContent, 'xml');
+        } else {
+            //save
+        }
+       
+    }
 
-        let filename = "file.xml";
+    convertToCSV = (rows, action) => {
+        let csvContent = "";
+
+        rows.forEach(function (value, index) {
+            csvContent += index + 1 + ",";
+
+            for (const key in value) {
+                csvContent += value[key] + ",";    
+            }
+            
+            csvContent += "\r\n";
+        });
+
+        if (action === 'download') {
+            this.downloadFile(csvContent, 'csv');
+        } else {
+            //save
+        }
+    }
+
+    convertToYAML = (rows, action) => {
+        let yamlContent = "persons: \n"
+        let row = "";
+        rows.forEach(function (value, index) {
+            row += " - " + "id: " + index + 1 + "\n";
+            for (var key in value) {
+                row += "   ";
+                row += key+": ";
+
+                if (key === "firstName" || key === "lastName") {
+                    row += `\"${value[key]}\"\n`;
+                } else {
+                    row += value[key] + "\n";
+                }
+
+            }
+        });
+        
+        yamlContent += row;
+
+        if (action === 'download') {
+            this.downloadFile(yamlContent, 'yaml');
+        } else {
+            //save
+        }
+    }
+
+    convertToJSON = (rows, action) => {
+        let jsonContent = "{\n\t\"persons\": [\n"
+        let row = "\t\t{\n ";
+
+        rows.forEach(function (value, index) {
+            row += "\t\t\t"+"\"" + "id: " + "\""+ ++index +"\"," + "\n";
+            for (var key in value) {
+                row += "\t\t\t" + "\"" + key + "\"" + ": " + "\""+value[key]+"\"";
+                if(key === "age") {
+                    row += "\n";
+                } else {
+                    row += ",\n";
+                }
+            }
+            if (index === rows.length) {
+                row  += "\t\t}\n"
+            } else {
+                row += "\t\t},\n";
+            }
+        });
+
+        jsonContent += row + "\t]\n}" ;
+
+        if (action === 'download') {
+            this.downloadFile(jsonContent, 'json');
+        } else {
+            //save
+        }
+    }
+
+    downloadFile = (text, format) => {
+
+        let filename = "persons." + format;
         let pom = document.createElement('a');
-        let bb = new Blob([xmltext], {type: 'text/plain'});
+        let bb = new Blob([text], {type: 'text/'+ format});
 
         pom.setAttribute('href', window.URL.createObjectURL(bb));
         pom.setAttribute('download', filename);
 
         pom.dataset.downloadurl = ['text/plain', pom.download, pom.href].join(':');
+        
+        pom.click();
+    }
 
-        pom.classList.add('xml__file');
+    saveFile = () => {
+
     }
     
 }
