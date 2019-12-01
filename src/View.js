@@ -56,22 +56,25 @@ class View {
         ///////////////////////////////////////////////////////////////////INPUTS
         
         const inputId = document.createElement("INPUT");
-        inputId.setAttribute("type", "text");
+        inputId.setAttribute("type", "text");          
         inputId.id = 'inputId';
         inputId.placeholder="Id"
 
         const inputFirstName = document.createElement("INPUT");
         inputFirstName.setAttribute("type", "text");
+
         inputFirstName.id = 'inputFirstName';
         inputFirstName.placeholder="First Name"
 
         const inputLastName = document.createElement("INPUT");
         inputLastName.setAttribute("type", "text");
+
         inputLastName.id = 'inputLastName';
         inputLastName.placeholder="Last Name"
 
         const inputAge = document.createElement("INPUT");
         inputAge.setAttribute("type", "text");
+
         inputAge.id = 'inputAge';
         inputAge.placeholder="Age"
 
@@ -135,7 +138,7 @@ class View {
         buttonRemoves.append(buttonRemoveById);
       
         this._root.append(wrapper);
-
+        ///////////////////////////////////////////////////////////////callback
     }
     //createElementInput //тут будет разбиение на функции createElement(название)
 
@@ -177,10 +180,58 @@ class View {
     }
     
     checkInputs = () => {
-        let id = getElementById('inputId');
-        let FirstName = getElementById('inputFirstName');
-        let LastName = getElementById('inputLastName');
-        let Age = getElementById('inputAge');
+        const inputId = getElementById('inputId');
+        const inputFirstName = getElementById('inputFirstName');
+        const inputLastName = getElementById('inputLastName');
+        const inputAge = getElementById('inputAge');
+    }
+    
+    OnbuttonAdding = cb => {
+        const buttonAddFirst = document.getElementById('buttonAddFirst');
+        const buttonAddEnd = document.getElementById('buttonAddEnd');
+        const buttonAddById = document.getElementById('buttonAddById');
+        
+        let inputId = document.getElementById('inputId');
+        let inputFirstName = document.getElementById('inputFirstName');
+        let inputLastName = document.getElementById('inputLastName');
+        let inputAge = document.getElementById('inputAge');
+    
+        buttonAddFirst.onclick = () => {
+            let action = 'tofirst'; //куда добавить элемент
+            cb(action, inputFirstName.value, inputLastName.value, inputAge.value, inputId.value);
+              
+            inputFirstName.value = '';
+            inputLastName.value = '';
+            inputAge.value = '';
+            inputId.value = '';
+        };
+
+        buttonAddEnd.onclick = () => {
+            let action = 'toend';
+            cb(action, inputFirstName.value, inputLastName.value, inputAge.value, inputId.value);
+              
+            inputFirstName.value = '';
+            inputLastName.value = '';
+            inputAge.value = '';
+            inputId.value = '';
+        };
+
+        buttonAddById.onclick = () => {
+            let action = 'byid';
+            cb(action, inputFirstName.value, inputLastName.value, inputAge.value, inputId.value);
+              
+            inputFirstName.value = '';
+            inputLastName.value = '';
+            inputAge.value = '';
+            inputId.value = '';
+        };
+
+
+
+        
+        // buttonAddEnd.onclick = () => {
+        //     cb(buttonAddEnd.value);
+        // };
     }
     
 }
