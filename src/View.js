@@ -58,18 +58,22 @@ class View {
         const inputId = document.createElement("INPUT");
         inputId.setAttribute("type", "text");
         inputId.id = 'inputId';
+        inputId.placeholder="Id"
 
         const inputFirstName = document.createElement("INPUT");
         inputFirstName.setAttribute("type", "text");
         inputFirstName.id = 'inputFirstName';
+        inputFirstName.placeholder="First Name"
 
         const inputLastName = document.createElement("INPUT");
         inputLastName.setAttribute("type", "text");
         inputLastName.id = 'inputLastName';
+        inputLastName.placeholder="Last Name"
 
         const inputAge = document.createElement("INPUT");
         inputAge.setAttribute("type", "text");
         inputAge.id = 'inputAge';
+        inputAge.placeholder="Age"
 
         //this.createInput('inputId');
 
@@ -120,7 +124,6 @@ class View {
         controllerInput.append(inputAge);
         controllerInput.append(inputId);
         
-
         controllerButtons.append(buttonRemoves);
         controllerButtons.append(buttonAdding);
 
@@ -132,7 +135,7 @@ class View {
         buttonRemoves.append(buttonRemoveById);
       
         this._root.append(wrapper);
-        
+
     }
     //createElementInput //тут будет разбиение на функции createElement(название)
 
@@ -144,7 +147,6 @@ class View {
     // }
 
     drawPersons = persons => {
-        this.clearAllPersons(); //чистит перед отрисовкой 
         const tbodyTr =  document.createElement('tbody');
         const tableThead = document.querySelector('.table-wrapper__table');
         tbodyTr.id = 'tbody';
@@ -167,16 +169,20 @@ class View {
 
         tableThead.append(tbodyTr);
     }
-
+    
+    //this.clearAllPersons(); //чистит перед отрисовкой 
     clearAllPersons = () => {
         let personsWrapper = document.getElementById('tbody');
         personsWrapper.remove();
     }
-
+    
     checkInputs = () => {
-
+        let id = getElementById('inputId');
+        let FirstName = getElementById('inputFirstName');
+        let LastName = getElementById('inputLastName');
+        let Age = getElementById('inputAge');
     }
-
+    
 }
 
 export default View;
