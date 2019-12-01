@@ -23,12 +23,24 @@ class Model {
         this._persons.unshift(person);
     }
 
+    shiftPerson = () => {
+        this._persons.shift();
+    }
+
     pushPerson = person => {
         this._persons.push(person);
     }
     
-    splicePerson = (person, id, action) => {
-        this._persons.splice(id-1, action, person);
+    popPerson = () => {
+        this._persons.pop();
+    }
+
+    spliceAddPerson = (id, person) => {
+        this._persons.splice(id-1, 0, person);
+    }
+
+    spliceRemovePerson = (id) => {
+        this._persons.splice(id-1, 1);
     }
 
 }

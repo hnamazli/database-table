@@ -184,9 +184,10 @@ class View {
         const inputFirstName = getElementById('inputFirstName');
         const inputLastName = getElementById('inputLastName');
         const inputAge = getElementById('inputAge');
+
     }
     
-    OnbuttonAdding = cb => {
+    OnbuttonAdding = cb => { // собирает данные для добавление в таблицу
         const buttonAddFirst = document.getElementById('buttonAddFirst');
         const buttonAddEnd = document.getElementById('buttonAddEnd');
         const buttonAddById = document.getElementById('buttonAddById');
@@ -226,12 +227,48 @@ class View {
             inputId.value = '';
         };
 
+    }
 
-
+    OnbuttonRemoving = cb => { //для удаления 
+        const buttonRemoveFirst = document.getElementById('buttonRemoveFirst');
+        const buttonRemoveEnd = document.getElementById('buttonRemoveEnd');
+        const buttonRemoveById = document.getElementById('buttonRemoveById');
         
-        // buttonAddEnd.onclick = () => {
-        //     cb(buttonAddEnd.value);
-        // };
+        const inputId = document.getElementById('inputId');
+        const inputFirstName = document.getElementById('inputFirstName');
+        const inputLastName = document.getElementById('inputLastName');
+        const inputAge = document.getElementById('inputAge');
+    
+        buttonRemoveFirst.onclick = () => {
+            let action = 'tofirst'; //откуда удалить элемент
+            cb(action, inputFirstName.value, inputLastName.value, inputAge.value);
+              
+            inputFirstName.value = '';
+            inputLastName.value = '';
+            inputAge.value = '';
+            inputId.value = '';
+        };
+
+        buttonRemoveEnd.onclick = () => {
+            let action = 'toend';
+            cb(action, inputFirstName.value, inputLastName.value, inputAge.value);
+              
+            inputFirstName.value = '';
+            inputLastName.value = '';
+            inputAge.value = '';
+            inputId.value = '';
+        };
+
+        buttonRemoveById.onclick = () => {
+            let action = 'byid';
+            cb(action, inputFirstName.value, inputLastName.value, inputAge.value, inputId.value);
+              
+            inputFirstName.value = '';
+            inputLastName.value = '';
+            inputAge.value = '';
+            inputId.value = '';
+        };
+
     }
     
 }
