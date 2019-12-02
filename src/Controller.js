@@ -143,7 +143,7 @@ class Controller {
         let xmlContent = "<?xml version='1.0' encoding='UTF-8'?>\r\n<persons>";
 
         rows.forEach(function (value, index) {
-            xmlContent += "\r\t" + "<person>" + "\r\t\t" + "<id>" + (index + 1) + "</id>" + "\r\n";
+            xmlContent += "\r\t" + "<person>" + "\r\t\t" + "<id>" + (++index) + "</id>" + "\r\n";
             for (let key in value) {
                 xmlContent += "\t\t" + "<" + key + ">" + value[key] + "</" + key + ">" + "\r\n";
             }
@@ -165,7 +165,7 @@ class Controller {
         let csvContent = "";
 
         rows.forEach(function (value, index) {
-            csvContent += index + 1 + ",";
+            csvContent += (++index) + ",";
 
             for (const key in value) {
                 csvContent += value[key] + ",";    
@@ -185,7 +185,7 @@ class Controller {
         let yamlContent = "persons: \n";
 
         rows.forEach(function (value, index) {
-            yamlContent += " - " + "id: " + index + 1 + "\n";
+            yamlContent += " - " + "id: " + (++index) + "\n";
             for (var key in value) {
                 yamlContent += "   ";
                 yamlContent += key+": ";
@@ -210,7 +210,7 @@ class Controller {
         let jsonContent = "{\n\t\"persons\": [\n";
 
         rows.forEach(function (value, index) {
-            jsonContent += "\t\t{\n\t\t\t" + "\"id\": " + "\"" + ++index + "\"," + "\n";
+            jsonContent += "\t\t{\n\t\t\t" + "\"id\": " + "\"" + (++index) + "\"," + "\n";
 
             for (var key in value) {
                 jsonContent += "\t\t\t" + "\"" + key + "\"" + ": " + "\"" + value[key] + "\"";
