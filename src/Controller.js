@@ -207,32 +207,31 @@ class Controller {
     }
 
     convertToJSON = (rows, action) => {
-        let jsonContent = "{\n\t\"persons\": [\n"
-        let row = "\t\t{\n ";
+        let jsonContent = "{\n\t\"persons\": [\n";
 
         rows.forEach(function (value, index) {
-            row += "\t\t\t"+"\"" + "id: " + "\""+ ++index +"\"," + "\n";
+            jsonContent += "\t\t{\n\t\t\t" + "\"id\": " + "\"" + ++index + "\"," + "\n";
+
             for (var key in value) {
-                row += "\t\t\t" + "\"" + key + "\"" + ": " + "\""+value[key]+"\"";
+                jsonContent += "\t\t\t" + "\"" + key + "\"" + ": " + "\"" + value[key] + "\"";
                 if(key === "age") {
-                    row += "\n";
+                    jsonContent += "\n";
                 } else {
-                    row += ",\n";
+                    jsonContent += ",\n";
                 }
             }
+
             if (index === rows.length) {
-                row  += "\t\t}\n"
+                jsonContent  += "\t\t}\n"
             } else {
-                row += "\t\t},\n";
+                jsonContent += "\t\t},\n";
             }
         });
 
-        jsonContent += row + "\t]\n}" ;
+        jsonContent += "\t]\n}" ;
 
         if (action === 'download') {
             this.downloadFile(jsonContent, 'json');
-        } else {
-            //save
         }
     }
 
