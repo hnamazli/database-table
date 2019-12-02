@@ -137,8 +137,7 @@ class Controller {
     }
 
     convertToXML = (rows, action) => {
-        let xmlContent = "<?xml version='1.0' encoding='UTF-8'?>\r\n";
-        xmlContent += "<persons>";
+        let xmlContent = "<?xml version='1.0' encoding='UTF-8'?>\r\n<persons>";
 
         rows.forEach(function (value, index) {
             xmlContent += "\r\t" + "<person>" + "\r\t\t" + "<id>" + (index + 1) + "</id>" + "\r\n";
@@ -180,24 +179,22 @@ class Controller {
     }
 
     convertToYAML = (rows, action) => {
-        let yamlContent = "persons: \n"
-        let row = "";
+        let yamlContent = "persons: \n";
+        
         rows.forEach(function (value, index) {
-            row += " - " + "id: " + index + 1 + "\n";
+            yamlContent += " - " + "id: " + index + 1 + "\n";
             for (var key in value) {
-                row += "   ";
-                row += key+": ";
+                yamlContent += "   ";
+                yamlContent += key+": ";
 
                 if (key === "firstName" || key === "lastName") {
-                    row += `\"${value[key]}\"\n`;
+                    yamlContent += `\"${value[key]}\"\n`;
                 } else {
-                    row += value[key] + "\n";
+                    yamlContent += value[key] + "\n";
                 }
 
             }
         });
-        
-        yamlContent += row;
 
         if (action === 'download') {
             this.downloadFile(yamlContent, 'yaml');
