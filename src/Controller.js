@@ -232,25 +232,27 @@ class Controller {
 
         if (action === 'download') {
             this.downloadFile(jsonContent, 'json');
+        } else {
+            //save
         }
     }
 
-    downloadFile = (text, format) => {
+    downloadFile = (data, format) => {
 
         let filename = "persons." + format;
-        let pom = document.createElement('a');
-        let bb = new Blob([text], {type: 'text/'+ format});
+        let link = document.createElement('a');
+        let bb = new Blob([data], {type: 'text/'+ format});
 
-        pom.setAttribute('href', window.URL.createObjectURL(bb));
-        pom.setAttribute('download', filename);
+        link.setAttribute('href', window.URL.createObjectURL(bb));
+        link.setAttribute('download', filename);
 
-        pom.dataset.downloadurl = ['text/plain', pom.download, pom.href].join(':');
+        link.dataset.downloadurl = ['text/plain', link.download, link.href].join(':');
         
-        pom.click();
+        link.click();
     }
 
     saveFile = () => {
-
+        //Save function
     }
     
 }
