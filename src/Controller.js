@@ -1,5 +1,4 @@
 import {sendGet, sendPut, sendPost} from './REST';
-import * as rest from './REST'; //for tests
 
 class Controller {
     constructor(model, view) {
@@ -130,20 +129,9 @@ class Controller {
     }
 
     formatSave = (format) => {
-        if (format === 'xml') {
-            this.convertToXML(this._model.getPersons());
-        }
-        if (format === 'csv') {
-            this.convertToCSV(this._model.getPersons());
-        }
-        if (format === 'yaml') {
-            this.convertToYAML(this._model.getPersons());
-        }
-        if (format === 'json') {
-            this.convertToJSON(this._model.getPersons());
-        }
-        //отправить формат в котором должен сохраниться файл на сервере
-        sendPost(format);
+        const data = [format];
+        
+        sendPost(data);
     }
 
     formatDownload = (format) => {
