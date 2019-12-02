@@ -1,4 +1,4 @@
-//import {sendGet, sendPut} from './REST';
+import {sendGet, sendPut, sendPost} from './REST';
 import * as rest from './REST'; //for tests
 
 class Controller {
@@ -38,6 +38,8 @@ class Controller {
             this.personAddById(firstName, lastName, age, id);
         }
 
+        //отрпавить на сервер массив
+        sendPut(this._model.getPersons());
     }
 
     personRemoving = (action, id) => {
@@ -53,7 +55,9 @@ class Controller {
         if (action === 'byid') {
             this.personRemoveById(id);
         }
-
+        
+        //отрпавить на сервер массив
+        sendPut(this._model.getPersons());
     }
 
     personAddtoFirst = (firstName, lastName, age) => {
@@ -64,6 +68,7 @@ class Controller {
         let data = this._model.getPersons();
 
         this._view.clearAllPersons();
+      
         this._view.drawPersons(data);
         this.setLocalStorage(data);
     }
@@ -76,8 +81,10 @@ class Controller {
         let data = this._model.getPersons();
 
         this._view.clearAllPersons();
+
         this._view.drawPersons(data);
         this.setLocalStorage(data);
+
     }
 
     personAddById = (firstName, lastName, age, id) => {
@@ -135,6 +142,8 @@ class Controller {
         if (format === 'json') {
             this.convertToJSON(this._model.getPersons());
         }
+        //отправить формат в котором должен сохраниться файл на сервере
+        sendPost(format);
     }
 
     formatDownload = (format) => {
@@ -211,7 +220,6 @@ class Controller {
                 } else {
                     yamlContent += value[key] + "\n";
                 }
-
             }
         });
 
