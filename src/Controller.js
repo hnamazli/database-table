@@ -20,6 +20,7 @@ class Controller {
               lastName: lastName,
               age: age
           }
+
           return person;
     }
 
@@ -58,8 +59,11 @@ class Controller {
     personAddtoFirst = (firstName, lastName, age) => {
         let person = this.personConfig(firstName, lastName, age);
 
-        this._model.unshiftPerson(person);
+        for (const key in person) {
+            localStorage.setItem(key, person[key]);
+        }
 
+        this._model.unshiftPerson(person);
 
         this._view.clearAllPersons();
         this._view.drawPersons(this._model.getPersons());
