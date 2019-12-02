@@ -8,17 +8,20 @@ class View {
     }
 
     init = () => {
-        const wrapper = document.createElement('div');
-        wrapper.classList.add('wrapper');
+        const wrapper = this.createDiv(['wrapper', 'container-fluid']);
+        const wrapperTop = this.createDiv(['wrapper__top', 'row']);
+        const topTable = this.createDiv(['top__table-wrapper', 'col-8']);
+        const topController = this.createDiv(['top__controller', 'col-4']);
+        const controllerInput = this.createDiv(['controller__input']);
+        const inputDiv = this.createDiv(['form-group', 'input__div']);
+        const controllerButtons = this.createDiv(['controller__buttons']);
+        const buttonAdding = this.createDiv(['buttons__adding']);
+        const buttonRemoves = this.createDiv(['buttons__removing']);
+        const wrapperBottom = this.createDiv(['wrapper__bottom']);
+        const bottomDownload = this.createDiv(['bottom__download']);
+        const bottomSave = this.createDiv(['bottom__save']);
 
-        const wrapperTop = document.createElement('div');
-        wrapperTop.classList.add('wrapper__top');
-        wrapperTop.classList.add('row');
-
-        const topTable = document.createElement('div');
-        topTable.classList.add('top__table-wrapper');
-        topTable.classList.add('col-8');
-
+        ///////////////////////////////////////////////////////////////////////////
         const table = document.createElement('table');
         table.classList.add('table-wrapper__table');
         table.classList.add('table');
@@ -36,118 +39,35 @@ class View {
             theadTr.append(th);
         });
         
-        /////////////////////////////////////////////////////////////////////////
-        const topController = document.createElement('div');
-        topController.classList.add('top__controller');
-        topController.classList.add('col-4');
-        /////////////////////////////////////////////////////////////////////////
-        const controllerInput = document.createElement('div'); ////див для вводов
-        controllerInput.classList.add('controller__input');
-
-        const controllerButtons = document.createElement('div'); //для кнопок 
-        controllerButtons.classList.add('controller__buttons');
-
-        const buttonAdding = document.createElement('div');
-        buttonAdding.classList.add('buttons__adding');
-
-        const buttonRemoves = document.createElement('div');
-        buttonRemoves.classList.add('buttons__removing');
         ///////////////////////////////////////////////////////////////////INPUTS
         
-        const inputId = document.createElement("INPUT");
-        inputId.setAttribute("type", "text");          
-        inputId.id = 'inputId';
-        inputId.placeholder="Id"
-
-        const inputFirstName = document.createElement("INPUT");
-        inputFirstName.setAttribute("type", "text");
-
-        inputFirstName.id = 'inputFirstName';
-        inputFirstName.placeholder="First Name"
-
-        const inputLastName = document.createElement("INPUT");
-        inputLastName.setAttribute("type", "text");
-
-        inputLastName.id = 'inputLastName';
-        inputLastName.placeholder="Last Name"
-
-        const inputAge = document.createElement("INPUT");
-        inputAge.setAttribute("type", "text");
-
-        inputAge.id = 'inputAge';
-        inputAge.placeholder="Age"
-
-        //this.createInput('inputId');
+        const inputID = this.createInput('inputID', ['form-control'], 'ID', 'number');
+        const inputFirstName = this.createInput('firstName', ['form-control'], 'First Name');
+        const inputLastName = this.createInput('lastName', ['form-control'], 'Last Name');
+        const inputAge = this.createInput('age', ['form-control'], 'Age', 'number');
 
         ///////////////////////////////////////////////////////////////////BUTTONS
-        const buttonAddFirst = document.createElement("BUTTON");
-        buttonAddFirst.id = 'buttonAddFirst';
-        buttonAddFirst.textContent = '+ First'
-
-        const buttonRemoveFirst = document.createElement("BUTTON");
-        buttonRemoveFirst.id = 'buttonRemoveFirst';
-        buttonRemoveFirst.textContent = '- First'
-
-        const buttonAddEnd = document.createElement("BUTTON");
-        buttonAddEnd.id = 'buttonAddEnd';
-        buttonAddEnd.textContent = '+ End';
-
-        const buttonRemoveEnd = document.createElement("BUTTON");
-        buttonRemoveEnd.id = 'buttonRemoveEnd';
-        buttonRemoveEnd.textContent = '- End';
-
-        const buttonAddById = document.createElement("BUTTON");
-        buttonAddById.id = 'buttonAddById';
-        buttonAddById.textContent = '+ Id';
-
-        const buttonRemoveById = document.createElement("BUTTON");
-        buttonRemoveById.id = 'buttonRemoveById';
-        buttonRemoveById.textContent = '- Id';
-
-        ////////////////////////////////////////////////////////////////////////////
-        const wrapperBottom = document.createElement('div');
-        wrapperBottom.classList.add('wrapper__bottom');
-
-        const bottomDownload = document.createElement('div');
-        bottomDownload.classList.add('bottom__download');
-
-        const bottomSave = document.createElement('div');
-        bottomSave.classList.add('bottom__save');
+        const buttonAddFirst = this.createButton('addToFirst', 'Add to first');
+        const buttonRemoveFirst = this.createButton('removeToFirst', 'Remove to first');
+        const buttonAddEnd = this.createButton('addToEnd', 'Add to end');
+        const buttonRemoveEnd = this.createButton('removeToEnd', 'Remove to end');
+        const buttonAddById = this.createButton('addByID', 'Add by ID');
+        const buttonRemoveById = this.createButton('removeByID', 'Remove by ID');
 
         ////////////////////////////////////////////////////////////////////////////DOWNLOAD
 
-        const  buttonDownloadXML = document.createElement("BUTTON");
-        buttonDownloadXML.id = 'buttonDownloadXML';
-        buttonDownloadXML.textContent = 'download XML';
+        const buttonDownloadXML = this.createButton('downXML', 'Download XML');
+        const buttonDownloadCSV = this.createButton('downCSV', 'Download CSV');
+        const buttonDownloadYAML = this.createButton('downYAML', 'Download YAML');
+        const buttonDownloadJSON = this.createButton('downJSON', 'Download JSON');
 
-        const buttonDownloadCSV = document.createElement("BUTTON");
-        buttonDownloadCSV.id = 'buttonDownloadCSV';
-        buttonDownloadCSV.textContent = 'download CSV';
-
-        const buttonDownloadYAML = document.createElement("BUTTON");
-        buttonDownloadYAML.id = 'buttonDownloadYAML';
-        buttonDownloadYAML.textContent = 'download YAML';
-
-        const buttonDownloadJSON = document.createElement("BUTTON");
-        buttonDownloadJSON.id = 'buttonDownloadJSON';
-        buttonDownloadJSON.textContent = 'download JSON';
         ///////////////////////////////////////////////////////////////////////////////SAVE
 
-        const buttonSaveXML = document.createElement("BUTTON");
-        buttonSaveXML.id = 'buttonSaveXML';
-        buttonSaveXML.textContent = 'Save XML';
+        const buttonSaveXML = this.createButton('saveXML', 'Save XML');
+        const buttonSaveCSV = this.createButton('saveCSV', 'Save CSV');
+        const buttonSaveYAML = this.createButton('saveYAML', 'Save YAML');
+        const buttonSaveJSON = this.createButton('saveJSON', 'Save JSON');
 
-        const buttonSaveCSV = document.createElement("BUTTON");
-        buttonSaveCSV.id = 'buttonSaveCSV';
-        buttonSaveCSV.textContent = 'Save CSV';
-
-        const buttonSaveYAML = document.createElement("BUTTON");
-        buttonSaveYAML.id = 'buttonSaveYAML';
-        buttonSaveYAML.textContent = 'Save YAML';
-
-        const buttonSaveJSON = document.createElement("BUTTON");
-        buttonSaveJSON.id = 'buttonSaveJSON';
-        buttonSaveJSON.textContent = 'Save JSON';
         //////////////////////////////////////////////////////////////////////////////////////
         wrapper.append(wrapperTop);
         wrapper.append(wrapperBottom);
@@ -162,13 +82,14 @@ class View {
         topController.append(controllerInput);
         topController.append(controllerButtons);
 
-        controllerInput.append(inputFirstName);
-        controllerInput.append(inputLastName);
-        controllerInput.append(inputAge);
-        controllerInput.append(inputId);
+        controllerInput.append(inputDiv);
+        inputDiv.append(inputFirstName);
+        inputDiv.append(inputLastName);
+        inputDiv.append(inputAge);
+        inputDiv.append(inputID);
         
-        controllerButtons.append(buttonRemoves);
         controllerButtons.append(buttonAdding);
+        controllerButtons.append(buttonRemoves);
 
         buttonAdding.append(buttonAddFirst);
         buttonRemoves.append(buttonRemoveFirst);
@@ -192,29 +113,54 @@ class View {
 
       
         this._root.append(wrapper);
-
-        ///////////////////////////////////////////////////////////////callback
     }
-    //createElementInput //тут будет разбиение на функции createElement(название)
 
-    // createInput = id => {
-    //     let input = document.createElement("INPUT");
-    //     input.setAttribute("type", "text");
-    //     input.id = id;
-    //     return input;
-    // }
+    createDiv = classes => {
+        const div = document.createElement('div');
+
+        if (classes) {
+            div.classList.add(...classes);
+        }
+
+        return div;
+    }
+
+    createInput = (id, classes, placeholder, type = 'text') => {
+        const input = document.createElement("input");
+        input.setAttribute("type", type);
+        input.placeholder = placeholder;
+        
+        if (id) {
+            input.id = id;
+        }
+
+        if (classes) {
+            input.classList.add(...classes);
+        }
+
+        return input;
+    }
+
+    createButton = (id, name) => {
+        const button = document.createElement("button");
+        button.id = id;
+        button.textContent = name;
+        
+        return button;
+    }
 
     drawPersons = persons => {
-        const tbodyTr =  document.createElement('tbody');
-        const tableThead = document.querySelector('.table-wrapper__table');
-        tbodyTr.id = 'tbody';
+        const tbody =  document.createElement('tbody');
+        tbody.id = 'tbody';
+
+        const table = document.querySelector('.table-wrapper__table');
 
         persons.forEach((element, index) => {
             const tr = document.createElement('tr');
             const th = document.createElement('th');
-            th.innerText = index + 1;
+            th.innerText = ++index;
 
-            tbodyTr.append(tr);
+            tbody.append(tr);
             tr.append(th);
             
             for (var key in element) {
@@ -225,64 +171,55 @@ class View {
             }
         });
 
-        tableThead.append(tbodyTr);
+        table.append(tbody);
     }
     
-   
     clearAllPersons = () => {
-        let personsWrapper = document.getElementById('tbody');
-        personsWrapper.remove();
+        let personsTable = document.getElementById('tbody');
+        personsTable.remove();
     }
-    /*
-    checkInputs = () => {
-        const inputId = getElementById('inputId');
-        const inputFirstName = getElementById('inputFirstName');
-        const inputLastName = getElementById('inputLastName');
-        const inputAge = getElementById('inputAge');
 
-    }
-    */
     onButtonAdding = cb => { // собирает данные для добавление в таблицу
        
-        buttonAddFirst.onclick = () => {
-            if (inputFirstName.value == '' || inputLastName.value == '' || inputAge.value == '') {
-                alert('not all data entered');
+        addToFirst.onclick = () => {
+            if (firstName.value == '' || lastName.value == '' || age.value == '') {
+                alert('Please fill in the correct form all cells.');
             } else {
                 let action = 'tofirst'; //куда добавить элемент
-                cb(action, inputFirstName.value, inputLastName.value, inputAge.value);
+                cb(action, firstName.value, lastName.value, age.value);
                   
-                inputFirstName.value = '';
-                inputLastName.value = '';
-                inputAge.value = '';
-                inputId.value = '';
+                firstName.value = '';
+                lastName.value = '';
+                age.value = '';
+                inputID.value = '';
             }     
         };
 
-        buttonAddEnd.onclick = () => {
-            if (inputFirstName.value == '' || inputLastName.value == '' || inputAge.value == '') {
-                alert('not all data entered');
+        addToEnd.onclick = () => {
+            if (firstName.value == '' || lastName.value == '' || age.value == '') {
+                alert('Please fill in the correct form all cells.');
             } else {
-                let action = 'tofirst'; //куда добавить элемент
-                cb(action, inputFirstName.value, inputLastName.value, inputAge.value);
+                let action = 'toend'; //куда добавить элемент
+                cb(action, firstName.value, lastName.value, age.value);
                   
-                inputFirstName.value = '';
-                inputLastName.value = '';
-                inputAge.value = '';
-                inputId.value = '';
+                firstName.value = '';
+                lastName.value = '';
+                age.value = '';
+                inputID.value = '';
             }     
         };
 
-        buttonAddById.onclick = () => {
-            if (inputFirstName.value == '' || inputLastName.value == '' || inputAge.value == '') {
-                alert('not all data entered');
+        addByID.onclick = () => {
+            if (firstName.value == '' || lastName.value == '' || age.value == '') {
+                alert('Please fill in the correct form all cells.');
             } else {
                 let action = 'byId'; //куда добавить элемент
-                cb(action, inputFirstName.value, inputLastName.value, inputAge.value, inputId.value);
+                cb(action, firstName.value, lastName.value, age.value, inputID.value);
                   
-                inputFirstName.value = '';
-                inputLastName.value = '';
-                inputAge.value = '';
-                inputId.value = '';
+                firstName.value = '';
+                lastName.value = '';
+                age.value = '';
+                inputID.value = '';
             }     
         };
 
@@ -290,24 +227,24 @@ class View {
 
     onButtonRemoving = cb => { //для удаления 
     
-        buttonRemoveFirst.onclick = () => {
+        removeToFirst.onclick = () => {
             let action = 'tofirst'; //откуда удалить элемент
             cb(action);
               
         };
 
-        buttonRemoveEnd.onclick = () => {
+        removeToEnd.onclick = () => {
             let action = 'toend';
-            cb(action, inputFirstName.value, inputLastName.value, inputAge.value);
+            cb(action, firstName.value, lastName.value, age.value);
               
         };
 
-        buttonRemoveById.onclick = () => {
-            if (inputId.value == ''){
-                alert('not all data entered');
+        removeByID.onclick = () => {
+            if (inputID.value == ''){
+                alert('Please fill in the correct form all cells.');
             } else {
                 let action = 'byid';
-                cb(action, inputId.value);
+                cb(action, inputID.value);
             }
               
         };
@@ -316,45 +253,53 @@ class View {
     
     onButtonSave = cb => {
 
-        buttonSaveXML.onclick = () => {
+        saveXML.onclick = () => {
             let format = 'xml';
+
             cb(format);
         }
 
-        buttonSaveCSV.onclick = () => {
+        saveCSV.onclick = () => {
             let format = 'csv';
+            
             cb(format);
         }
 
-        buttonSaveYAML.onclick = () => {
+        saveYAML.onclick = () => {
             let format = 'yaml';
+            
             cb(format);
         }
 
-        buttonSaveJSON.onclick = () => {
+        saveJSON.onclick = () => {
             let format = 'json';
+            
             cb(format);
         }
     }
 
     onButtonDownload = cb => {
-        buttonDownloadXML.onclick = () => {
+        downXML.onclick = () => {
             let format = 'xml';
+
             cb(format);
         }
 
-        buttonDownloadCSV.onclick = () => {
+        downCSV.onclick = () => {
             let format = 'csv';
+
             cb(format);
         }
 
-        buttonDownloadYAML.onclick = () => {
+        downYAML.onclick = () => {
             let format = 'yaml';
+
             cb(format);
         }
 
-        buttonDownloadJSON.onclick = () => {
+        downJSON.onclick = () => {
             let format = 'json';
+
             cb(format);
         }
     }
