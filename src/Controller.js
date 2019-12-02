@@ -139,10 +139,10 @@ class Controller {
         }
     }
 
-    convertToXML = (rows, action) => {
+    convertToXML = (data, action) => {
         let xmlContent = "<?xml version='1.0' encoding='UTF-8'?>\r\n<persons>";
 
-        rows.forEach(function (value, index) {
+        data.forEach(function (value, index) {
             xmlContent += "\r\t" + "<person>" + "\r\t\t" + "<id>" + (++index) + "</id>" + "\r\n";
             for (let key in value) {
                 xmlContent += "\t\t" + "<" + key + ">" + value[key] + "</" + key + ">" + "\r\n";
@@ -161,10 +161,10 @@ class Controller {
        
     }
 
-    convertToCSV = (rows, action) => {
-        let csvContent = "";
+    convertToCSV = (data, action) => {
+        let csvContent = "ID, First Name, Last Name, Age,\r\n";
 
-        rows.forEach(function (value, index) {
+        data.forEach(function (value, index) {
             csvContent += (++index) + ",";
 
             for (const key in value) {
@@ -181,10 +181,10 @@ class Controller {
         }
     }
 
-    convertToYAML = (rows, action) => {
+    convertToYAML = (data, action) => {
         let yamlContent = "persons: \n";
 
-        rows.forEach(function (value, index) {
+        data.forEach(function (value, index) {
             yamlContent += " - " + "id: " + (++index) + "\n";
             for (var key in value) {
                 yamlContent += "   ";
@@ -206,10 +206,10 @@ class Controller {
         }
     }
 
-    convertToJSON = (rows, action) => {
+    convertToJSON = (data, action) => {
         let jsonContent = "{\n\t\"persons\": [\n";
 
-        rows.forEach(function (value, index) {
+        data.forEach(function (value, index) {
             jsonContent += "\t\t{\n\t\t\t" + "\"id\": " + "\"" + (++index) + "\"," + "\n";
 
             for (var key in value) {
@@ -221,7 +221,7 @@ class Controller {
                 }
             }
 
-            if (index === rows.length) {
+            if (index === data.length) {
                 jsonContent  += "\t\t}\n"
             } else {
                 jsonContent += "\t\t},\n";
