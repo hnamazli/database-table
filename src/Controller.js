@@ -121,18 +121,21 @@ class Controller {
     }
 
     formatDownload = (format) => {
-
-        if (format === 'xml') {
-            this.convertToXML(this._model.getPersons(), 'download');
-        }
-        if (format === 'csv') {
-            this.convertToCSV(this._model.getPersons(), 'download');
-        }
-        if (format === 'yaml') {
-            this.convertToYAML(this._model.getPersons(), 'download');
-        }
-        if (format === 'json') {
-            this.convertToJSON(this._model.getPersons(), 'download');
+        switch (format) {
+            case 'xml':
+                this.convertToXML(this._model.getPersons(), 'download');
+                break;
+            case 'csv':
+                this.convertToCSV(this._model.getPersons(), 'download');
+                break;
+            case 'yaml':
+                this.convertToYAML(this._model.getPersons(), 'download');
+                break;
+            case 'json':
+                this.convertToJSON(this._model.getPersons(), 'download');
+                break;
+            default:
+                break;
         }
     }
 
@@ -180,7 +183,7 @@ class Controller {
 
     convertToYAML = (rows, action) => {
         let yamlContent = "persons: \n";
-        
+
         rows.forEach(function (value, index) {
             yamlContent += " - " + "id: " + index + 1 + "\n";
             for (var key in value) {
