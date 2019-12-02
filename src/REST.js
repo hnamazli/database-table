@@ -1,9 +1,9 @@
-import * as constants from './constants';
-const url = constants.URL;
+// import * as constants from './constants';
+const url = 'http://localhost:2019/persons';
 
-export const sendGet = (url, cb) => {
+export const sendGet = (cb) => {
     const xhr = new XMLHttpRequest();
-    xhr.open('GET', url);
+    xhr.open('GET', 'http://localhost:2019/persons');
     xhr.setRequestHeader('Content-type', 'application/json; charset=utf-8');
     xhr.onload = () => {
         if (xhr.readyState === 4 && xhr.status === 200) {
@@ -14,9 +14,23 @@ export const sendGet = (url, cb) => {
     xhr.send();
 }
 
-export const sendPut = function(url, data, cb) {
+export const sendPut = function(data, cb) {
     const xhr = new XMLHttpRequest();
-    xhr.open('PUT', url);
+    xhr.open('PUT', 'http://localhost:2019/persons');
+    xhr.setRequestHeader('Content-type', 'application/json; charset=utf-8');
+    xhr.onload = () => {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+            const data = JSON.parse(xhr.response);
+            cb && (cb(data));
+
+        };
+    }
+    xhr.send(JSON.stringify(data));
+}
+
+export const sendPost = function(data, cb) {
+    const xhr = new XMLHttpRequest();
+    xhr.open('POST', 'http://localhost:2019/persons');
     xhr.setRequestHeader('Content-type', 'application/json; charset=utf-8');
     xhr.onload = () => {
         if (xhr.readyState === 4 && xhr.status === 200) {
@@ -26,18 +40,3 @@ export const sendPut = function(url, data, cb) {
     }
     xhr.send(JSON.stringify(data));
 }
-
-export const sendPost = function(url, data, cb) {
-    const xhr = new XMLHttpRequest();
-    xhr.open('POST', url);
-    xhr.setRequestHeader('Content-type', 'application/json; charset=utf-8');
-    xhr.onload = () => {
-        if (xhr.readyState === 4 && xhr.status === 200) {
-            const data = JSON.parse(xhr.response);
-            cb && (cb(data));
-        };
-    }
-    xhr.send(JSON.stringify(data));
-}
-
-

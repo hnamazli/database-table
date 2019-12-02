@@ -1,4 +1,4 @@
-//import {sendGet, sendPut} from './REST';
+import {sendGet, sendPut, sendPost} from './REST';
 import * as rest from './REST'; //for tests
 
 class Controller {
@@ -38,6 +38,8 @@ class Controller {
             this.personAddById(firstName, lastName, age, id);
         }
 
+        //отрпавить на сервер массив
+        sendPut(this._model.getPersons());
     }
 
     personRemoving = (action, id) => {
@@ -53,7 +55,9 @@ class Controller {
         if (action === 'byid') {
             this.personRemoveById(id);
         }
-
+        
+        //отрпавить на сервер массив
+        sendPut(this._model.getPersons());
     }
 
     personAddtoFirst = (firstName, lastName, age) => {
@@ -67,6 +71,7 @@ class Controller {
 
         this._view.clearAllPersons();
         this._view.drawPersons(this._model.getPersons());
+
     }
 
     personAddtoEnd = (firstName, lastName, age) => {
@@ -77,6 +82,7 @@ class Controller {
 
         this._view.clearAllPersons();
         this._view.drawPersons(this._model.getPersons());
+
     }
 
     personAddById = (firstName, lastName, age, id) => {
@@ -122,6 +128,8 @@ class Controller {
         if (format === 'json') {
             this.convertToJSON(this._model.getPersons());
         }
+        //отправить формат в котором должен сохраниться файл на сервере
+        sendPost(format);
     }
 
     formatDownload = (format) => {
@@ -159,10 +167,7 @@ class Controller {
 
         if (action === 'download') {
             this.downloadFile(xmlContent, 'xml');
-        } else {
-            //save
         }
-       
     }
 
     convertToCSV = (data, action) => {
@@ -180,9 +185,7 @@ class Controller {
 
         if (action === 'download') {
             this.downloadFile(csvContent, 'csv');
-        } else {
-            //save
-        }
+        } 
     }
 
     convertToYAML = (data, action) => {
@@ -199,14 +202,11 @@ class Controller {
                 } else {
                     yamlContent += value[key] + "\n";
                 }
-
             }
         });
 
         if (action === 'download') {
             this.downloadFile(yamlContent, 'yaml');
-        } else {
-            //save
         }
     }
 
@@ -236,8 +236,6 @@ class Controller {
 
         if (action === 'download') {
             this.downloadFile(jsonContent, 'json');
-        } else {
-            //save
         }
     }
 
@@ -254,11 +252,6 @@ class Controller {
         
         link.click();
     }
-
-    saveFile = () => {
-        //Save function
-    }
-    
 }
 
 window.rest = rest; //for tests
