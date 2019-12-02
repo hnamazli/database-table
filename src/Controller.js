@@ -19,9 +19,9 @@ class Controller {
               firstName: firstName,
               lastName: lastName,
               age: age
-          }
+        }
 
-          return person;
+        return person;
     }
 
     personAdding = (action, firstName, lastName, age, id) => {
@@ -34,7 +34,7 @@ class Controller {
             this.personAddtoEnd(firstName, lastName, age);
         }
 
-        if (action === 'byid') {
+        if (action === 'byId') {
             this.personAddById(firstName, lastName, age, id);
         }
 
@@ -63,25 +63,27 @@ class Controller {
     personAddtoFirst = (firstName, lastName, age) => {
         let person = this.personConfig(firstName, lastName, age);
 
-        for (const key in person) {
-            localStorage.setItem(key, person[key]);
-        }
-
         this._model.unshiftPerson(person);
 
-        this._view.clearAllPersons();
-        this._view.drawPersons(this._model.getPersons());
+        let data = this._model.getPersons();
 
+        this._view.clearAllPersons();
+      
+        this._view.drawPersons(data);
+        this.setLocalStorage(data);
     }
 
     personAddtoEnd = (firstName, lastName, age) => {
         let person = this.personConfig(firstName, lastName, age);
-
+        
         this._model.pushPerson(person);
 
+        let data = this._model.getPersons();
 
         this._view.clearAllPersons();
-        this._view.drawPersons(this._model.getPersons());
+
+        this._view.drawPersons(data);
+        this.setLocalStorage(data);
 
     }
 
@@ -90,29 +92,41 @@ class Controller {
 
         this._model.spliceAddPerson(+id, person);
 
+        let data = this._model.getPersons();
+
         this._view.clearAllPersons();
-        this._view.drawPersons(this._model.getPersons());
+        this._view.drawPersons(data);
+        this.setLocalStorage(data);
     }
     
     personRemoveFirst = () => {
         this._model.shiftPerson();
 
+        let data = this._model.getPersons();
+
         this._view.clearAllPersons();
-        this._view.drawPersons(this._model.getPersons());
+        this._view.drawPersons(data);
+        this.setLocalStorage(data);
     }
 
     personRemoveEnd = () => {
         this._model.popPerson();
 
+        let data = this._model.getPersons();
+
         this._view.clearAllPersons();
-        this._view.drawPersons(this._model.getPersons());
+        this._view.drawPersons(data);
+        this.setLocalStorage(data);
     }
 
     personRemoveById = id => {
         this._model.spliceRemovePerson(id);
 
+        let data = this._model.getPersons();
+
         this._view.clearAllPersons();
-        this._view.drawPersons(this._model.getPersons());
+        this._view.drawPersons(data);
+        this.setLocalStorage(data);
     }
 
     formatSave = (format) => {
@@ -135,23 +149,31 @@ class Controller {
     formatDownload = (format) => {
         switch (format) {
             case 'xml':
-                this.convertToXML(this._model.getPersons(), 'download');
+                let convertXML = this.convertToXML(this._model.getPersons());
+
+                this.downloadFile(convertXML, 'xml');
                 break;
             case 'csv':
-                this.convertToCSV(this._model.getPersons(), 'download');
+                let convertCSV = this.convertToCSV(this._model.getPersons());
+
+                this.downloadFile(convertCSV, 'csv');
                 break;
             case 'yaml':
-                this.convertToYAML(this._model.getPersons(), 'download');
+                let convertYAML = this.convertToYAML(this._model.getPersons());
+
+                this.downloadFile(convertYAML, 'yaml');
                 break;
             case 'json':
-                this.convertToJSON(this._model.getPersons(), 'download');
+                let convertJSON = this.convertToJSON(this._model.getPersons());
+
+                this.downloadFile(convertJSON, 'json');
                 break;
             default:
                 break;
         }
     }
 
-    convertToXML = (data, action) => {
+    convertToXML = (data) => {
         let xmlContent = "<?xml version='1.0' encoding='UTF-8'?>\r\n<persons>";
 
         data.forEach(function (value, index) {
@@ -165,12 +187,10 @@ class Controller {
 
         xmlContent += "</persons>";
 
-        if (action === 'download') {
-            this.downloadFile(xmlContent, 'xml');
-        }
+        return xmlContent;       
     }
 
-    convertToCSV = (data, action) => {
+    convertToCSV = (data) => {
         let csvContent = "ID, First Name, Last Name, Age,\r\n";
 
         data.forEach(function (value, index) {
@@ -183,12 +203,10 @@ class Controller {
             csvContent += "\r\n";
         });
 
-        if (action === 'download') {
-            this.downloadFile(csvContent, 'csv');
-        } 
+        return csvContent;
     }
 
-    convertToYAML = (data, action) => {
+    convertToYAML = (data) => {
         let yamlContent = "persons: \n";
 
         data.forEach(function (value, index) {
@@ -205,12 +223,10 @@ class Controller {
             }
         });
 
-        if (action === 'download') {
-            this.downloadFile(yamlContent, 'yaml');
-        }
+        return yamlContent;
     }
 
-    convertToJSON = (data, action) => {
+    convertToJSON = (data) => {
         let jsonContent = "{\n\t\"persons\": [\n";
 
         data.forEach(function (value, index) {
@@ -234,9 +250,13 @@ class Controller {
 
         jsonContent += "\t]\n}" ;
 
-        if (action === 'download') {
-            this.downloadFile(jsonContent, 'json');
-        }
+        return jsonContent;
+    }
+
+    setLocalStorage = (data) => {
+        let jsonData = this.convertToJSON(data);
+
+        localStorage.setItem('Persons', jsonData);
     }
 
     downloadFile = (data, format) => {
@@ -253,7 +273,5 @@ class Controller {
         link.click();
     }
 }
-
-window.rest = rest; //for tests
 
 export default Controller;
