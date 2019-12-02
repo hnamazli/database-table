@@ -34,7 +34,7 @@ class Controller {
             this.personAddtoEnd(firstName, lastName, age);
         }
 
-        if (action === 'byid') {
+        if (action === 'byId') {
             this.personAddById(firstName, lastName, age, id);
         }
 
