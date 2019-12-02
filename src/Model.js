@@ -27,11 +27,11 @@ class Model {
     }
 
     spliceAddPerson = (id, person) => {
-        this._persons.splice(id-1, 0, person);
+        this._persons.splice(id - 1, 0, person);
     }
 
     spliceRemovePerson = (id) => {
-        this._persons.splice(id-1, 1);
+        this._persons.splice(id - 1, 1);
     }
 
 }
