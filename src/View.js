@@ -21,32 +21,13 @@ class View {
         const bottomDownload = this.createDiv(['bottom__download']);
         const bottomSave = this.createDiv(['bottom__save']);
 
-        ///////////////////////////////////////////////////////////////////////////
-        const table = document.createElement('table');
-        table.classList.add('table-wrapper__table');
-        table.classList.add('table');
-
-        const tableThead = document.createElement('thead');
-        tableThead.classList.add('table-thead');
-        tableThead.classList.add('thead-light');
-
-        const theadTr = document.createElement('tr');
-
-        constants.HEADERS.forEach(element => {
-            const th = document.createElement('th');
-            th.innerText = element;
-
-            theadTr.append(th);
-        });
-        
-        ///////////////////////////////////////////////////////////////////INPUTS
+        const table = this.createTable();
         
         const inputID = this.createInput('inputID', ['form-control'], 'ID', 'number');
         const inputFirstName = this.createInput('firstName', ['form-control'], 'First Name');
         const inputLastName = this.createInput('lastName', ['form-control'], 'Last Name');
         const inputAge = this.createInput('age', ['form-control'], 'Age', 'number');
 
-        ///////////////////////////////////////////////////////////////////BUTTONS
         const buttonAddFirst = this.createButton('addToFirst', 'Add to first');
         const buttonRemoveFirst = this.createButton('removeToFirst', 'Remove to first');
         const buttonAddEnd = this.createButton('addToEnd', 'Add to end');
@@ -54,63 +35,46 @@ class View {
         const buttonAddById = this.createButton('addByID', 'Add by ID');
         const buttonRemoveById = this.createButton('removeByID', 'Remove by ID');
 
-        ////////////////////////////////////////////////////////////////////////////DOWNLOAD
-
         const buttonDownloadXML = this.createButton('downXML', 'Download XML');
         const buttonDownloadCSV = this.createButton('downCSV', 'Download CSV');
         const buttonDownloadYAML = this.createButton('downYAML', 'Download YAML');
         const buttonDownloadJSON = this.createButton('downJSON', 'Download JSON');
-
-        ///////////////////////////////////////////////////////////////////////////////SAVE
 
         const buttonSaveXML = this.createButton('saveXML', 'Save XML');
         const buttonSaveCSV = this.createButton('saveCSV', 'Save CSV');
         const buttonSaveYAML = this.createButton('saveYAML', 'Save YAML');
         const buttonSaveJSON = this.createButton('saveJSON', 'Save JSON');
 
-        //////////////////////////////////////////////////////////////////////////////////////
         wrapper.append(wrapperTop);
         wrapper.append(wrapperBottom);
-
         wrapperTop.append(topTable);
         wrapperTop.append(topController);
-
-        table.append(tableThead);
         topTable.append(table);
-        tableThead.append(theadTr);
-       
         topController.append(controllerInput);
         topController.append(controllerButtons);
-
         controllerInput.append(inputDiv);
         inputDiv.append(inputFirstName);
         inputDiv.append(inputLastName);
         inputDiv.append(inputAge);
         inputDiv.append(inputID);
-        
         controllerButtons.append(buttonAdding);
         controllerButtons.append(buttonRemoves);
-
         buttonAdding.append(buttonAddFirst);
         buttonRemoves.append(buttonRemoveFirst);
         buttonAdding.append(buttonAddEnd);
         buttonRemoves.append(buttonRemoveEnd);
         buttonAdding.append(buttonAddById);
         buttonRemoves.append(buttonRemoveById);
-
         wrapperBottom.append(bottomDownload);
         wrapperBottom.append(bottomSave);
-
         bottomDownload.append(buttonDownloadXML);
         bottomDownload.append(buttonDownloadCSV);
         bottomDownload.append(buttonDownloadYAML);
         bottomDownload.append(buttonDownloadJSON);
-
         bottomSave.append(buttonSaveXML);
         bottomSave.append(buttonSaveCSV);
         bottomSave.append(buttonSaveYAML);
         bottomSave.append(buttonSaveJSON);
-
       
         this._root.append(wrapper);
     }
@@ -147,6 +111,28 @@ class View {
         button.textContent = name;
         
         return button;
+    }
+
+    createTable = () => {
+        const table = document.createElement('table');
+        table.classList.add('table-wrapper__table', 'table');
+
+        const tableThead = document.createElement('thead');
+        tableThead.classList.add('table-thead', 'thead-light');
+
+        const theadTr = document.createElement('tr');
+
+        constants.HEADERS.forEach(element => {
+            const th = document.createElement('th');
+            th.innerText = element;
+
+            theadTr.append(th);
+        });
+
+        tableThead.append(theadTr);
+        table.append(tableThead);
+
+        return table;
     }
 
     drawPersons = persons => {

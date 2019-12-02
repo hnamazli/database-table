@@ -1,5 +1,9 @@
 @import "~bootstrap/scss/bootstrap";
 
+.wrapper__top {
+  margin-bottom: 150px;
+}
+
 .top__controller {
   padding: 0 15px;
   
@@ -26,11 +30,42 @@
       button {
         width: 30%;
         border: none;
+        background: linear-gradient(90deg, #4df33d, #0fa32f);
+        color: #fff;
+        padding: 10px 0;
+        font-weight: bold;
+      }
+    }
+
+    .buttons__removing {
+      button {
+        background: linear-gradient(90deg, #e34141, #b81919);
+      }
+    }
+  }
+}
+
+.wrapper__bottom {
+    display: flex;
+
+    .bottom__download, .bottom__save {
+      width: 100%;
+      text-align: center;
+
+      button {
+        width: 15%;
+        margin: 0 15px;
+        border: none;
         background: linear-gradient(90deg, #c3c3c3, #8a8a8a);
         color: #fff;
         padding: 10px 0;
         font-weight: bold;
       }
     }
-  }
+
+    .bottom__save {
+      button {
+        background: linear-gradient(90deg, #c3c3c3, #8a8a8a);
+      }
+    }
 }
