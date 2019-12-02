@@ -186,6 +186,7 @@ class View {
                 alert('Please fill in the correct form all cells.');
             } else {
                 let action = 'toend'; //куда добавить элемент
+              
                 cb(action, firstName.value, lastName.value, age.value);
                   
                 firstName.value = '';
@@ -200,6 +201,7 @@ class View {
                 alert('Please fill in the correct form all cells.');
             } else {
                 let action = 'byId'; //куда добавить элемент
+              
                 cb(action, firstName.value, lastName.value, age.value, inputID.value);
                   
                 firstName.value = '';

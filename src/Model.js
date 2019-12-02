@@ -5,7 +5,7 @@ class Model {
 
         ];
     }
-
+    
     getPersons = () => {
         return [...this._persons];
     }
